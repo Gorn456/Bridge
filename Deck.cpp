@@ -6,9 +6,11 @@
 
 
 Deck::Deck() {
+    int card_strength ;
     for(int i = 0; i < 4; i++) {
         for (int j = 0; j < 13; ++j) {
-            CardsArray.push_back(*(new Card(static_cast<Rank>(j), static_cast<Suit>(i)))) ;
+            card_strength = (j < 9) ? 0 : ++card_strength ;
+            CardsArray.push_back(Card(static_cast<Rank>(j), static_cast<Suit>(i), card_strength)) ;
         }
     }
 }
@@ -28,5 +30,14 @@ void Deck::shuffle() {
         CardsArray.at(j) = temp ;
     }
 }
+
+std::vector<std::vector<Card>> Deck::dealCards() {
+    std::vector<std::vector<Card>> temp(4) ;
+    for (size_t i = 0; i < CardsArray.size(); i++) {
+        temp.at(i % 4).push_back(CardsArray.at(i));
+    }
+    return temp ;
+}
+
 
 

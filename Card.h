@@ -36,7 +36,9 @@ private:
     char rank_symbol ;
     char suit_symbol ;
 public:
-    Card(Rank _rank, Suit _suit) ;
+    int strength ;
+
+    Card(Rank _rank, Suit _suit, int _strength) ;
 
     Rank getRank() const ;
 
@@ -45,6 +47,7 @@ public:
     char getRank_symbol() const ;
 
     char getSuit_symbol() const ;
+
 };
 
 

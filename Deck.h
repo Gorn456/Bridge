@@ -24,6 +24,8 @@ public:
 
     void shuffle() ;
 
+    std::vector<std::vector<Card>> dealCards() ;
+
 
 
 };

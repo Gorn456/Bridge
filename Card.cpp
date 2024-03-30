@@ -4,7 +4,7 @@
 
 #include "Card.h"
 
-Card::Card(const Rank _rank, const Suit _suit) : rank(_rank), suit(_suit) {
+Card::Card(const Rank _rank, const Suit _suit, const int _strength) : rank(_rank), suit(_suit), strength(_strength) {
     switch (_rank) {
         case Rank::DEUCE:
             rank_symbol = '2' ;
