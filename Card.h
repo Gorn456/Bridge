@@ -5,6 +5,8 @@
 #ifndef BRIDGE_CARD_H
 #define BRIDGE_CARD_H
 
+#include <iostream>
+
 enum class Rank {
     DEUCE,
     THREE,
@@ -25,30 +27,34 @@ enum class Suit {
     CLUB,
     DIAMOND,
     HEART,
-    SPADE
+    SPADE,
+    NT // bez atu
 };
+
+std::ostream& operator<<(std::ostream& os, const Suit& suit) ;
+std::ostream& operator<<(std::ostream& os, const Rank& rank) ;
 
 
 class Card {
 private:
     Rank rank ;
     Suit suit ;
-    char rank_symbol ;
-    char suit_symbol ;
 public:
     int strength ;
 
     Card(Rank _rank, Suit _suit, int _strength) ;
+    Card(Rank _rank, Suit _suit) ;
+    Card(char _rank, char _suit) ;
+    Card() = default;
 
     Rank getRank() const ;
 
     Suit getSuit() const ;
 
-    char getRank_symbol() const ;
-
-    char getSuit_symbol() const ;
-
 };
+
+std::istream& operator>>(std::istream& is, Card& card) ;
+bool operator==(const Card& lhs, const Card& rhs) ;
 
 
 #endif //BRIDGE_CARD_H

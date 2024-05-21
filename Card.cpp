@@ -4,63 +4,140 @@
 
 #include "Card.h"
 
-Card::Card(const Rank _rank, const Suit _suit, const int _strength) : rank(_rank), suit(_suit), strength(_strength) {
-    switch (_rank) {
-        case Rank::DEUCE:
-            rank_symbol = '2' ;
+std::ostream& operator<<(std::ostream& os, const Suit& suit) {
+    switch (suit) {
+        case Suit::CLUB :
+            os << 'c' ;
             break ;
-        case Rank::THREE:
-            rank_symbol = '3' ;
+        case Suit::DIAMOND :
+            os << 'd' ;
             break ;
-        case Rank::FOUR:
-            rank_symbol = '4' ;
+        case Suit::HEART :
+            os << 'h' ;
             break ;
-        case Rank::FIVE:
-            rank_symbol = '5' ;
+        case Suit::SPADE :
+            os << 's' ;
             break ;
-        case Rank::SIX:
-            rank_symbol = '6' ;
-            break ;
-        case Rank::SEVEN:
-            rank_symbol = '7' ;
-            break ;
-        case Rank::EIGHT:
-            rank_symbol = '8' ;
-            break ;
-        case Rank::NINE:
-            rank_symbol = '9' ;
-            break ;
-        case Rank::TEN:
-            rank_symbol = 'T' ;
-            break ;
-        case Rank::JACK:
-            rank_symbol = 'J' ;
-            break ;
-        case Rank::QUEEN:
-            rank_symbol = 'Q' ;
-            break ;
-        case Rank::KING:
-            rank_symbol = 'K' ;
-            break ;
-        case Rank::ACE:
-            rank_symbol = 'A' ;
-            break ;
-        
-    }
-    switch (_suit) {
-        case Suit::CLUB:
-            suit_symbol = 'c' ;
-            break ;
-        case Suit::DIAMOND:
-            suit_symbol = 'd' ;
-            break ;
-        case Suit::HEART:
-            suit_symbol = 'h' ;
-            break ;
-        case Suit::SPADE:
-            suit_symbol = 's' ;
+        case Suit::NT :
+            os << 'b' ;
             break ;
 
+    }
+    return os ;
+}
+
+std::ostream& operator<<(std::ostream& os, const Rank& rank) {
+    switch (rank) {
+        case Rank::DEUCE :
+            os << '2' ;
+            break ;
+        case Rank::THREE :
+            os << '3' ;
+            break ;
+        case Rank::FOUR :
+            os << '4' ;
+            break ;
+        case Rank::FIVE :
+            os << '5' ;
+            break ;
+        case Rank::SIX :
+            os << '6' ;
+            break ;
+        case Rank::SEVEN :
+            os << '7' ;
+            break ;
+        case Rank::EIGHT :
+            os << '8' ;
+            break ;
+        case Rank::NINE :
+            os << '9' ;
+            break ;
+        case Rank::TEN :
+            os << 'T' ;
+            break ;
+        case Rank::JACK :
+            os << 'J' ;
+            break ;
+        case Rank::QUEEN :
+            os << 'Q' ;
+            break ;
+        case Rank::KING :
+            os << 'K' ;
+            break ;
+        case Rank::ACE :
+            os << 'A' ;
+            break ;
+    }
+    return os ;
+}
+
+bool operator==(const Card& lhs, const Card& rhs) {
+    return lhs.getRank() == rhs.getRank() && lhs.getSuit() == rhs.getSuit() ;
+}
+
+Card::Card(const Rank _rank, const Suit _suit, const int _strength) : rank(_rank), suit(_suit), strength(_strength) {}
+
+Card::Card(const Rank _rank, const Suit _suit) : rank(_rank), suit(_suit) {}
+
+Card::Card(char _rank, char _suit) {
+    switch (_rank) {
+        case '2' :
+            rank = Rank::DEUCE ;
+            break ;
+        case '3' :
+            rank = Rank::THREE ;
+            break ;
+        case '4' :
+            rank = Rank::FOUR ;
+            break ;
+        case '5' :
+            rank = Rank::FIVE ;
+            break ;
+        case '6' :
+            rank = Rank::SIX ;
+            break ;
+        case '7' :
+            rank = Rank::SEVEN ;
+            break ;
+        case '8' :
+            rank = Rank::EIGHT ;
+            break ;
+        case '9' :
+            rank = Rank::NINE ;
+            break ;
+        case 'T' :
+            rank = Rank::TEN ;
+            break ;
+        case 'J' :
+            rank = Rank::JACK ;
+            break ;
+        case 'Q' :
+            rank = Rank::QUEEN ;
+            break ;
+        case 'K' :
+            rank = Rank::KING ;
+            break ;
+        case 'A' :
+            rank = Rank::ACE ;
+            break ;
+        default:
+            throw std::runtime_error("Something goes wrong with rank conversion") ;
+    }
+    switch (_suit) {
+        case 'c' :
+            suit = Suit::CLUB ;
+            break ;
+        case 'd' :
+            suit = Suit::DIAMOND ;
+            break ;
+        case 'h' :
+            suit = Suit::HEART ;
+            break ;
+        case 's' :
+            suit = Suit::SPADE ;
+            break ;
+        default:
+            throw std::runtime_error("Something goes wrong with suit conversion") ;
     }
 }
 
@@ -72,10 +149,3 @@ Suit Card::getSuit() const {
     return suit ;
 }
 
-char Card::getRank_symbol() const {
-    return rank_symbol ;
-}
-
-char Card::getSuit_symbol() const {
-    return suit_symbol ;
-}

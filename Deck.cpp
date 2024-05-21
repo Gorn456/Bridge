@@ -17,7 +17,7 @@ Deck::Deck() {
 
 void Deck::display() {
     for (const Card& card : CardsArray) {
-        std::cout << card.getRank_symbol() << card.getSuit_symbol() << std::endl ;
+        std::cout << card.getRank() << card.getSuit() << std::endl ;
     }
 }
 

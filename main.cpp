@@ -1,43 +1,39 @@
-#include <iostream>
+// http://www.pilsener.fr.pl/brydz/brydz_abc.php?a=4
+
+
+
+#include "Game.h"
 #include "Deck.h"
 #include "Random.h"
-#include "Player.h"
 
-class Game {
-public:
-    std::vector<Player *> pPlayers; // array of pointers to players (types Player and Hero)
-    int heroPoints = 0 ;
-    int heroAdditionalPoints = 0 ;
-    Hero S = Hero() ; // Self
-    Player N = Player() ; // Partner
-
-    int enemyPoints = 0 ;
-    int enemyAdditionalPoints = 0 ;
-    Player W = Player() ; // Enemy on a left
-    Player E = Player() ; // Enemy on a right
-
-    Game() {
-        pPlayers.push_back(&S) ;
-        pPlayers.push_back(&W) ;
-        pPlayers.push_back(&N) ;
-        pPlayers.push_back(&E) ;
-    }
-};
 
 
 int main() {
     int handCounter = 0 ;
+    bool end = false ;
     Game game ;
     Deck deck ;
 
-    deck.shuffle() ;
-    auto dealedCards = deck.dealCards() ;
-    int dealer = handCounter % 4 ;
-    for (auto & set : dealedCards) {
-        game.pPlayers.at(dealer)->setCards(set) ;
-        dealer = (dealer < 3) ? ++dealer : 0 ;
-    }
-    game.S.displayCards() ;
+    do {
+        int dealer = handCounter % 4;
+
+        game.dealCards(deck, dealer);
+
+        auto [declarer, contract] = game.auction(dealer);
+
+        auto [ourTricks, theirTricks] = game.play(declarer, contract);
+
+        end = game.score(ourTricks, theirTricks, declarer, contract);
+
+        game.displayScore();
+
+        handCounter++;
+
+        game.reset();
+
+    } while (!end) ;
+
+
 
     return 0;
 }

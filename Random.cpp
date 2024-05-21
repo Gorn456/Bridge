@@ -10,3 +10,4 @@ int Random::randint(const int lower,const int upper) {
     std::uniform_int_distribution<int> range(lower, upper) ;
     return range(generator) ;
 }
+
