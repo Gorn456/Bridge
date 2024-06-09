@@ -21,9 +21,11 @@ int main() {
 
         auto [declarer, contract] = game.auction(dealer);
 
-        auto [ourTricks, theirTricks] = game.play(declarer, contract);
+        if (contract.first) { // if contract is not passed
+            auto [ourTricks, theirTricks] = game.play(declarer, contract);
 
-        end = game.score(ourTricks, theirTricks, declarer, contract);
+            end = game.score(ourTricks, theirTricks, declarer, contract);
+        }
 
         game.displayScore();
 

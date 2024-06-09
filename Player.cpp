@@ -286,7 +286,7 @@ Card Enemy::playCard(std::vector<Card> &trick, Suit trump) {
              * */
         else if (suitsLength[trickSuit] == 0 && strongestCard.getSuit() == trump) {
             if (suitsLength[trump] > 0 && highestCardInSuit(trump).getRank() > strongestCard.getRank()) {
-                Card candidate = highestCardInSuit(trickSuit) ;
+                Card candidate = highestCardInSuit(trump) ;
                 for (const auto &card: CardsArray) {
                     if (card.getSuit() == trump && card.getRank() < candidate.getRank() &&
                         card.getRank() > strongestCard.getRank()) {

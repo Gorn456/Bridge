@@ -24,17 +24,17 @@ private:
     int trick(int tricker, int dummy, std::vector<Card>& playedCards, Suit trump) ;
     int trickWinner(const std::vector<Card>& trick, int tricker, Suit trump) ;
 public:
-    std::vector<Player *> pPlayers; // array of pointers to players (types Player and Hero)
+    std::array<Player *, 4> pPlayers; // array of pointers to players (types Player and Hero)
     Hero S = Hero() ; // Self
     Partner N = Partner() ; // Partner
     Enemy W = Enemy() ; // Enemy on a left
     Enemy E = Enemy() ; // Enemy on a right
 
     Game() {
-        pPlayers.push_back(&S) ;
-        pPlayers.push_back(&W) ;
-        pPlayers.push_back(dynamic_cast<Player*>(&N)) ;
-        pPlayers.push_back(&E) ;
+        pPlayers.at(0) = &S ;
+        pPlayers.at(1) = &W ;
+        pPlayers.at(2) = &N ;
+        pPlayers.at(3) = &E ;
     }
 
     void dealCards(Deck& deck, int dealer) ;
