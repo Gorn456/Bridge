@@ -10,6 +10,7 @@
 #include <algorithm>
 #include "Card.h"
 #include "InputListener.h"
+#include "BidList.h"
 
 
 
@@ -44,7 +45,7 @@ protected:
      */
     void removeCardFromHand(Card &card) ;
     void removeCardFromArray(Card &card, std::vector<Card> &array) ;
-    word getLastWord(const std::vector<word>& previous) ;
+    word getLastWord(const BidList& previous) ;
     void calculateStrength() ;
     /*
     * Hand is balanced when all suits have length above 2
@@ -78,7 +79,7 @@ public:
      * @param previous A vector of previous bids.
      * @return The bid made by the AI player.
      */
-    virtual word makeBid(std::vector<word>& previous) = 0 ;
+    virtual word makeBid(BidList& previous) = 0 ;
     /**
      * Plays a card based on the trick and the cards that have been played.
      *
@@ -98,7 +99,7 @@ public:
 class Hero : virtual public Player {
 public:
 
-    word makeBid(std::vector<word>& previous) override ;
+    word makeBid(BidList& previous) override ;
 
     Card playCard(std::vector<Card>& trick, Suit trump) override ;
 
@@ -106,14 +107,14 @@ public:
 
 class Enemy : virtual public Player {
 public:
-    word makeBid(std::vector<word>& previous) override ;
+    word makeBid(BidList& previous) override ;
 
     Card playCard(std::vector<Card>& trick, Suit trump) override ;
 };
 
 class Partner : public Enemy, public Hero {
 public:
-    word makeBid(std::vector<word>& previous) override ;
+    word makeBid(BidList& previous) override ;
 
     Card playCard(std::vector<Card>& trick, Suit trump) override ;
 

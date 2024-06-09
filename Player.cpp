@@ -71,12 +71,12 @@ void Player::sortCards() {
     }) ;
 }
 
-word Enemy::makeBid(std::vector<word>& previous) {
+word Enemy::makeBid(BidList& previous) {
     word last_word = getLastWord(previous) ;
-    std::vector<word> our_words ;
+    BidList our_words ;
     word last_partner_word = std::make_pair(0, Suit::CLUB) ;
 
-    for (int i = previous.size() - 2; i >= 0; i -= 2) {
+    for (int i = previous.length() - 2; i >= 0; i -= 2) {
         our_words.push_back(previous.at(i)) ;
     }
     if (!our_words.empty()) last_partner_word = our_words.at(0) ;
@@ -169,9 +169,9 @@ word Enemy::makeBid(std::vector<word>& previous) {
    return std::make_pair(0, Suit::CLUB) ;
 }
 
-word Player::getLastWord(const std::vector<word>& previous) {
+word Player::getLastWord(const BidList& previous) {
         word last_word = std::make_pair(0, Suit::CLUB) ;
-        for (int i = previous.size() - 1; i >= 0; i--) {
+        for (int i = previous.length() - 1; i >= 0; i--) {
             if (previous.at(i).first != 0) {
                 last_word = previous.at(i) ;
                 break ;
@@ -215,7 +215,7 @@ Card Player::highestCardInSuit(Suit suit) {
     for (const auto &card: CardsArray) {
         if (card.getSuit() == suit) return card ;
     }
-    throw std::runtime_error("Something goes wrong with lowestCardInSuit") ;
+    throw std::runtime_error("Something goes wrong with highestCardInSuit") ;
 }
 
 Card Enemy::playCard(std::vector<Card> &trick, Suit trump) {
@@ -371,7 +371,7 @@ void Player::reset() {
     } ;
 }
 
-word Hero::makeBid(std::vector<word>& previous) {
+word Hero::makeBid(BidList& previous) {
     bool correct = false ;
     word bid ;
     word last_word = getLastWord(previous) ;
@@ -408,7 +408,7 @@ Card Hero::playCard(std::vector<Card> &trick, Suit trump) {
     return card ;
 }
 
-word Partner::makeBid(std::vector<word>& previous) {
+word Partner::makeBid(BidList& previous) {
     return Enemy::makeBid(previous) ;
 }
 

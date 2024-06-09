@@ -19,8 +19,8 @@ private:
     int enemyPoints = 0 ;
     int enemyAdditionalPoints = 0 ;
     int enemyGames = 0 ; // number of games won by enemies
-    bool endOfAuction(const std::vector<word>& biddingHistory) ;
-    int declarer(int lastBidder, const std::vector<word>& biddingHistory) ;
+    bool endOfAuction(const BidList& biddingHistory) ;
+    int declarer(int lastBidder, const BidList& biddingHistory) ;
     int trick(int tricker, int dummy, std::vector<Card>& playedCards, Suit trump) ;
     int trickWinner(const std::vector<Card>& trick, int tricker, Suit trump) ;
 public:

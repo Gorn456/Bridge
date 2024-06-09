@@ -7,7 +7,8 @@
 
 
 std::pair<int, word> Game::auction(int dealer)  {
-    std::vector<word> biddingHistory ;
+    // BidList biddingHistory ;
+    BidList biddingHistory ;
     do
     {
         auto bid = pPlayers.at(dealer)->makeBid(biddingHistory) ;
@@ -16,7 +17,7 @@ std::pair<int, word> Game::auction(int dealer)  {
         dealer = (dealer < 3) ? ++dealer : 0 ;
     } while (!endOfAuction(biddingHistory)) ;
     
-    return std::make_pair(declarer(dealer, biddingHistory), biddingHistory.at(biddingHistory.size() - 4)) ;
+    return std::make_pair(declarer(dealer, biddingHistory), biddingHistory.at(biddingHistory.length() - 4)) ;
 }
 
 std::pair<int, int> Game::play(int declarer, word contract) {
@@ -75,23 +76,23 @@ int Game::trickWinner(const std::vector<Card> &trick, int tricker, Suit trump) {
 }
 
 
-bool Game::endOfAuction(const std::vector<word>& biddingHistory) {
-    if (biddingHistory.size() < 4) return false ;
-    for (int i = biddingHistory.size() - 1; i > biddingHistory.size() - 4; i--) {
+bool Game::endOfAuction(const BidList& biddingHistory) {
+    if (biddingHistory.length() < 4) return false ;
+    for (int i = biddingHistory.length() - 1; i > biddingHistory.length() - 4; i--) {
         if (biddingHistory.at(i).first != 0) return false ;
     }
     return true ;
 }
 
-int Game::declarer(int lastBidder, const std::vector<word> &biddingHistory) {
-    std::vector<word> our_words ;
-    for (int i = biddingHistory.size() - 4; i >= 0; i -= 2) {
+int Game::declarer(int lastBidder, const BidList &biddingHistory) {
+    BidList our_words ;
+    for (int i = biddingHistory.length() - 4; i >= 0; i -= 2) {
         our_words.push_back(biddingHistory.at(i)) ;
     }
     auto declaredSuit = our_words.at(0).second ;
 
     int currentBidder = lastBidder ;
-    for (int i = 1; i < our_words.size(); i++) {
+    for (int i = 1; i < our_words.length(); i++) {
         currentBidder += 2;
         if (currentBidder > 3) currentBidder -= 4;
         if (our_words.at(i).first != 0 && our_words.at(i).second == declaredSuit) lastBidder = currentBidder;
