@@ -8,6 +8,9 @@
 #include <array>
 #include "Game.h"
 
+#define BOLD_TEXT "\033[1m"
+#define RESET_TEXT "\033[0m"
+
 std::string InputListener::read(int state, Hero& self) {
     bool correct = false ;
     std::string buf ;
@@ -15,7 +18,8 @@ std::string InputListener::read(int state, Hero& self) {
     else std::cout << "Choose card to play" << std::endl ;
     do {
         std::getline(std::cin, buf) ;
-        if (buf == "help" || buf == "-h") help() ;
+        if (buf == "quit" || buf == "-q") exit(0) ;
+        else if (buf == "help" || buf == "-h") help() ;
         else if (buf == "cards" || buf == "-c") self.displayCards() ;
 
         else if (correctInput(buf, state)) {
@@ -28,7 +32,21 @@ std::string InputListener::read(int state, Hero& self) {
 }
 
 void InputListener::help() {
-    std::cout << "Placeholder" << std::endl ;
+    std::cout << BOLD_TEXT << "-q or quit" << RESET_TEXT << " for quit\n"
+            << BOLD_TEXT << "-c or cards" << RESET_TEXT << " for cards display\n" 
+            << BOLD_TEXT << "-h or help" << RESET_TEXT << " for help\n" << std::endl
+            << BOLD_TEXT << "Auction:\n" << RESET_TEXT << std::endl
+            << BOLD_TEXT << "p or pass" << RESET_TEXT << " for pass\n"
+            << BOLD_TEXT << "<1-7> <s|h|d|c|b>" << RESET_TEXT << " for bid\n"
+            << BOLD_TEXT << "c" << RESET_TEXT << " - clubs\n"
+            << BOLD_TEXT << "d" << RESET_TEXT << " - diamonds\n"
+            << BOLD_TEXT << "h" << RESET_TEXT << " - hearts\n"
+            << BOLD_TEXT << "s" << RESET_TEXT << " - spades\n"
+            << BOLD_TEXT << "b" << RESET_TEXT << " - no trump\n"
+            << "for example 1s for 1 spade\n" << std::endl 
+            << BOLD_TEXT << "Hand play:\n" << RESET_TEXT << std::endl
+            << BOLD_TEXT << "<2-9|T|J|Q|K|A> <s|h|d|c>" << RESET_TEXT << " for card\n"
+            << std::endl ;
 }
 
 bool InputListener::correctInput(std::string input, int state) {
