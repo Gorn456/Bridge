@@ -71,8 +71,8 @@ std::ostream& operator<<(std::ostream& os, const Rank& rank) {
     return os ;
 }
 
-bool operator==(const Card& lhs, const Card& rhs) {
-    return lhs.getRank() == rhs.getRank() && lhs.getSuit() == rhs.getSuit() ;
+bool operator==(const Card& left, const Card& right) {
+    return left.getRank() == right.getRank() && left.getSuit() == right.getSuit() ;
 }
 
 Card::Card(const Rank _rank, const Suit _suit, const int _strength) : rank(_rank), suit(_suit), strength(_strength) {}

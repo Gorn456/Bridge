@@ -15,23 +15,23 @@ int main() {
     Deck deck ;
 
     do {
-        int dealer = handCounter % 4;
+        int dealer = handCounter % 4 ;
 
-        game.dealCards(deck, dealer);
+        game.dealCards(deck, dealer) ;
 
-        auto [declarer, contract] = game.auction(dealer);
+        auto [declarer, contract] = game.auction(dealer) ;
 
         if (contract.first) { // if contract is not passed
-            auto [ourTricks, theirTricks] = game.play(declarer, contract);
+            auto [ourTricks, theirTricks] = game.play(declarer, contract) ;
 
-            end = game.score(ourTricks, theirTricks, declarer, contract);
+            end = game.score(ourTricks, theirTricks, declarer, contract) ;
         }
 
-        game.displayScore();
+        game.displayScore() ;
 
-        handCounter++;
+        handCounter++ ;
 
-        game.reset();
+        game.reset() ;
 
     } while (!end) ;
 

@@ -7,7 +7,6 @@
 
 
 std::pair<int, word> Game::auction(int dealer)  {
-    // BidList biddingHistory ;
     BidList biddingHistory ;
     do
     {
@@ -65,12 +64,6 @@ int Game::trickWinner(const std::vector<Card> &trick, int tricker, Suit trump) {
             winner = (tricker + i) % 4 ;
             strongest = trick.at(i) ;
         }
-            // higher trump card
-//        else if (trick.at(i).getSuit() == trump && strongest.getSuit() == trump &&
-//                 trick.at(i).getRank() > strongest.getRank()) {
-//            winner = (tricker + i) % 4 ;
-//            strongest = trick.at(i) ;
-//        }
     }
     return winner ;
 }

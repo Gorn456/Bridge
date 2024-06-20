@@ -45,7 +45,7 @@ public:
     Card(Rank _rank, Suit _suit, int _strength) ;
     Card(Rank _rank, Suit _suit) ;
     Card(char _rank, char _suit) ;
-    Card() = default;
+    Card() = default ;
 
     Rank getRank() const ;
 
@@ -54,7 +54,7 @@ public:
 };
 
 std::istream& operator>>(std::istream& is, Card& card) ;
-bool operator==(const Card& lhs, const Card& rhs) ;
+bool operator==(const Card& left, const Card& right) ;
 
 
 #endif //BRIDGE_CARD_H

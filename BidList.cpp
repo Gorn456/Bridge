@@ -9,24 +9,24 @@ void BidList::push_back(const word& data) {
     size++ ;
 
     if (!head) {
-        head = std::move(newNode);
-        return;
+        head = std::move(newNode) ;
+        return ;
     }
 
     Node* current = head.get();
     while (current->next) {
-        current = current->next.get();
+        current = current->next.get() ;
     }
-    current->next = std::move(newNode);
+    current->next = std::move(newNode) ;
 }
 
 word BidList::at(int index) const {
-    Node* current = head.get();
+    Node* current = head.get() ;
     for (int i = 0; i < index; i++) {
         if (!current) {
-            throw std::out_of_range("Index out of range");
+            throw std::out_of_range("Index out of range") ;
         }
-        current = current->next.get();
+        current = current->next.get() ;
     }
     if (!current) {
         throw std::out_of_range("Index out of range");
