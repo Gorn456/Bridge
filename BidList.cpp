@@ -34,6 +34,34 @@ word BidList::at(int index) const {
     return current->data ;
 }
 
+word& BidList::operator[](int index) {
+    Node* current = head.get();
+    for (int i = 0; i < index; i++) {
+        if (!current) {
+            throw std::out_of_range("Index out of range");
+        }
+        current = current->next.get();
+    }
+    if (!current) {
+        throw std::out_of_range("Index out of range");
+    }
+    return current->data;
+}
+
+const word& BidList::operator[](int index) const {
+    Node* current = head.get();
+    for (int i = 0; i < index; i++) {
+        if (!current) {
+            throw std::out_of_range("Index out of range");
+        }
+        current = current->next.get();
+    }
+    if (!current) {
+        throw std::out_of_range("Index out of range");
+    }
+    return current->data;
+}
+
 unsigned int BidList::length() const {
     return size ;
 }

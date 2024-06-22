@@ -23,6 +23,10 @@ public:
 
     word at(int index) const ;
 
+    word& operator[](int index) ;
+
+    const word& operator[](int index) const ;
+
     unsigned int length() const ;
 
     bool empty() const ;
